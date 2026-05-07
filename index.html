@@ -118,7 +118,6 @@ nav {
 .phone-orbit-2 { width: 530px; height: 530px; border-color: rgba(74,143,212,0.07); animation-duration: 30s; animation-direction: reverse; }
 @keyframes spin { from{transform:rotate(0)} to{transform:rotate(360deg)} }
 
-/* Outer shell — titanium-style frame */
 .phone-shell {
   position: relative; z-index: 2;
   width: 280px;
@@ -133,7 +132,6 @@ nav {
     0 0 80px rgba(74,143,212,0.08);
 }
 
-/* Side buttons */
 .phone-btn-vol {
   position: absolute; left: -3px; top: 110px;
   width: 3px; height: 34px;
@@ -155,7 +153,6 @@ nav {
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
 }
 
-/* Screen bezel */
 .phone-bezel {
   background: #060C18;
   border-radius: 44px;
@@ -163,7 +160,6 @@ nav {
   position: relative;
 }
 
-/* Status bar */
 .phone-status {
   display: flex; align-items: center; justify-content: space-between;
   padding: 14px 22px 6px;
@@ -191,14 +187,12 @@ nav {
   background: rgba(255,255,255,0.9); border-radius: 1px;
 }
 
-/* Dynamic Island */
 .phone-island {
   position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
   width: 92px; height: 28px;
   background: #000; border-radius: 20px; z-index: 4;
 }
 
-/* Screen content — matches real app */
 .phone-screen-content {
   padding: 0 0 16px;
   background: #000;
@@ -227,7 +221,6 @@ nav {
 .app-banner-text-title { font-size: 14px; font-weight: 600; color: #fff; font-family: var(--sans); }
 .app-banner-text-sub { font-size: 12px; color: rgba(180,210,255,0.55); font-family: var(--sans); margin-top: 1px; }
 
-/* Task rows */
 .task-list { flex: 1; padding: 0 16px; }
 .task-row {
   display: flex; align-items: center; gap: 12px;
@@ -249,7 +242,6 @@ nav {
   border: 2px solid #4A8FD4; flex-shrink: 0;
 }
 
-/* Home indicator */
 .phone-home-indicator {
   width: 120px; height: 4px; background: rgba(255,255,255,0.22);
   border-radius: 2px; margin: 12px auto 0;
@@ -270,12 +262,6 @@ nav {
 .step-title { font-family: var(--serif); font-size: 1.5rem; font-weight: 300; color: var(--white); margin-bottom: 0.75rem; line-height: 1.2; }
 .step-body { font-size: 0.87rem; line-height: 1.75; color: var(--muted); font-weight: 300; }
 
-/* STATS */
-.stat-band { background: var(--sun); display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background-color: rgba(180,140,20,0.2); }
-.stat-item { background: var(--sun); text-align: center; padding: 3.5rem 2rem; }
-.stat-num { font-family: var(--serif); font-size: 3.5rem; font-weight: 300; color: var(--navy-deep); line-height: 1; margin-bottom: 0.5rem; }
-.stat-label { font-size: 0.72rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(8,14,28,0.55); }
-
 /* WHY */
 .why { padding: 9rem 4rem; background: var(--navy-dark); }
 .why-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; max-width: 1100px; margin: 5rem auto 0; }
@@ -284,17 +270,6 @@ nav {
 .why-icon { font-size: 1.75rem; margin-bottom: 1.5rem; display: block; }
 .why-title { font-family: var(--serif); font-size: 1.6rem; font-weight: 300; color: var(--white); margin-bottom: 0.75rem; line-height: 1.2; }
 .why-body { font-size: 0.88rem; line-height: 1.8; color: var(--muted); font-weight: 300; }
-
-/* TESTIMONIALS */
-.testimonials { background: linear-gradient(160deg, #080E1C 0%, #0C1A38 60%, #080E1C 100%); padding: 9rem 4rem; position: relative; overflow: hidden; }
-.testimonials::after { content: ''; position: absolute; bottom: -10%; left: 50%; transform: translateX(-50%); width: 800px; height: 400px; background: radial-gradient(ellipse, rgba(245,194,50,0.05) 0%, transparent 65%); pointer-events: none; }
-.testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; max-width: 1100px; margin: 5rem auto 0; }
-.testi-card { background: rgba(123,184,245,0.04); border: 1px solid rgba(123,184,245,0.09); border-radius: 20px; padding: 2.25rem; transition: background 0.3s, border-color 0.3s; }
-.testi-card:hover { background: rgba(123,184,245,0.08); border-color: rgba(74,143,212,0.25); }
-.testi-stars { color: var(--sun); font-size: 0.82rem; letter-spacing: 0.1em; margin-bottom: 1.1rem; }
-.testi-quote { font-family: var(--serif); font-size: 1.08rem; font-weight: 300; font-style: italic; color: rgba(238,244,255,0.85); line-height: 1.65; margin-bottom: 1.5rem; }
-.testi-author { font-size: 0.76rem; color: var(--muted); letter-spacing: 0.05em; }
-.testi-author strong { color: rgba(238,244,255,0.6); font-weight: 500; display: block; margin-bottom: 0.2rem; }
 
 /* PRICING */
 .pricing { padding: 9rem 4rem; background: var(--navy-dark); }
@@ -359,11 +334,10 @@ footer { background: #050A14; padding: 2.75rem 4rem; display: flex; align-items:
   .nav-links { display: none; }
   .concept { grid-template-columns: 1fr; padding: 6rem 2rem; gap: 3rem; }
   .concept-visual { order: -1; }
-  .how, .why, .testimonials, .cta-section, .pricing { padding: 6rem 2rem; }
+  .how, .why, .cta-section, .pricing { padding: 6rem 2rem; }
   .steps { grid-template-columns: 1fr 1fr !important; }
-  .why-grid, .testi-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
   .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
-  .stat-band { grid-template-columns: 1fr; }
   footer { flex-direction: column; text-align: center; }
   .phone-orbit, .phone-orbit-2 { display: none; }
 }
@@ -374,14 +348,13 @@ footer { background: #050A14; padding: 2.75rem 4rem; display: flex; align-items:
   .hero-cta-row { flex-direction: column; align-items: center; }
   .btn-primary, .btn-ghost { width: 100%; max-width: 300px; justify-content: center; }
   .concept { padding: 5rem 1.5rem; }
-  .how, .why, .testimonials, .cta-section, .pricing { padding: 5rem 1.5rem; }
+  .how, .why, .cta-section, .pricing { padding: 5rem 1.5rem; }
   .steps { grid-template-columns: 1fr !important; }
   .steps::before { display: none; }
   .section-title { font-size: 2.2rem; }
   .concept-title { font-size: 2.4rem; }
   .cta-title { font-size: 2.6rem; }
   .marquee-item { font-size: 0.65rem; padding: 0 1.5rem; }
-  .stat-num { font-size: 2.75rem; }
   .phone-shell { width: 240px; }
   .app-main-title { font-size: 22px; }
   footer { padding: 2rem 1.5rem; }
@@ -452,12 +425,10 @@ footer { background: #050A14; padding: 2.75rem 4rem; display: flex; align-items:
     <div class="phone-orbit phone-orbit-2"></div>
 
     <div class="phone-shell">
-      <!-- Side buttons -->
       <div class="phone-btn-vol"></div>
       <div class="phone-btn-power"></div>
 
       <div class="phone-bezel">
-        <!-- Status bar -->
         <div class="phone-status">
           <span class="phone-time">9:41</span>
           <div class="phone-icons">
@@ -469,10 +440,8 @@ footer { background: #050A14; padding: 2.75rem 4rem; display: flex; align-items:
           </div>
         </div>
 
-        <!-- Dynamic Island -->
         <div class="phone-island"></div>
 
-        <!-- App screen -->
         <div class="phone-screen-content">
           <div class="app-top-bar">
             <div class="app-close-btn">Close</div>
@@ -575,12 +544,6 @@ footer { background: #050A14; padding: 2.75rem 4rem; display: flex; align-items:
   </div>
 </section>
 
-<div class="stat-band">
-  <div class="stat-item"><p class="stat-num">2.1M</p><p class="stat-label">Tasks completed</p></div>
-  <div class="stat-item"><p class="stat-num">87%</p><p class="stat-label">Still using after 30 days</p></div>
-  <div class="stat-item"><p class="stat-num">4.8★</p><p class="stat-label">App Store rating</p></div>
-</div>
-
 <section class="why" id="why">
   <div class="section-header">
     <span class="section-label">Why EarlyRise</span>
@@ -601,30 +564,6 @@ footer { background: #050A14; padding: 2.75rem 4rem; display: flex; align-items:
       <span class="why-icon">🌱</span>
       <h3 class="why-title">Real-world results</h3>
       <p class="why-body">More water. More movement. More fresh air. The tasks are small by design — but they compound into a morning routine that actually sticks.</p>
-    </div>
-  </div>
-</section>
-
-<section class="testimonials">
-  <div class="section-header">
-    <span class="section-label">What people say</span>
-    <h2 class="section-title">The people <em>love it.</em></h2>
-  </div>
-  <div class="testi-grid">
-    <div class="testi-card">
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-quote">"I've tried every screen time app and deleted them all within a week. EarlyRise is different — I actually look forward to opening it."</p>
-      <div class="testi-author"><strong>Mia R.</strong>Designer, Portland</div>
-    </div>
-    <div class="testi-card">
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-quote">"My doomscrolling hasn't disappeared — but now I do 10 pushups before every session. I've done more exercise this month than the whole last year."</p>
-      <div class="testi-author"><strong>Jake T.</strong>Marketing, Chicago</div>
-    </div>
-    <div class="testi-card">
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-quote">"The genius part is it doesn't fight your instincts. It just redirects them. My therapist actually recommended I keep using it."</p>
-      <div class="testi-author"><strong>Priya K.</strong>Teacher, Austin</div>
     </div>
   </div>
 </section>
