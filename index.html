@@ -5,362 +5,267 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EarlyRise — Earn Your Scroll</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,900&f[]=switzer@400,500,600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --navy-deep:   #080E1C;
-  --navy-dark:   #0C1628;
-  --navy-mid:    #112040;
-  --navy-light:  #1C3260;
-  --sky-dark:    #2A6BBF;
-  --sky-mid:     #4A8FD4;
-  --sky-light:   #7BB8F5;
-  --sky-pale:    #B8D9F8;
-  --sun:         #F5C232;
-  --sun-warm:    #F0A020;
-  --horizon:     #E87820;
-  --white:       #EEF4FF;
-  --muted:       rgba(180,210,255,0.55);
-  --serif: 'Cormorant Garamond', Georgia, serif;
-  --sans: 'DM Sans', system-ui, sans-serif;
+  /* night */
+  --navy-950: oklch(0.14 0.045 256);
+  --navy-900: oklch(0.19 0.05 256);
+  --navy-800: oklch(0.27 0.06 254);
+  --navy-700: oklch(0.34 0.07 252);
+  /* dawn */
+  --blue-600: oklch(0.52 0.13 246);
+  --blue-500: oklch(0.62 0.12 240);
+  --blue-300: oklch(0.78 0.08 230);
+  --amber-600: oklch(0.68 0.16 55);
+  --gold-400: oklch(0.82 0.15 82);
+  --gold-300: oklch(0.88 0.12 85);
+  /* daylight */
+  --cream-50: oklch(0.985 0.008 80);
+  --skytint-50: oklch(0.965 0.012 232);
+  /* ink */
+  --ink-900: oklch(0.16 0.03 256);
+  --ink-700: oklch(0.32 0.025 256);
+  --blue-ink: oklch(0.42 0.13 246);
+  --amber-ink: oklch(0.46 0.14 55);
+  --paper-100: oklch(0.97 0.01 90);
+  --muted-on-dark: oklch(0.75 0.04 240);
+
+  --display: 'Cabinet Grotesk', system-ui, sans-serif;
+  --body: 'Switzer', system-ui, sans-serif;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 html { scroll-behavior: smooth; }
-body { font-family: var(--sans); background: var(--navy-deep); color: var(--white); overflow-x: hidden; }
+body { font-family: var(--body); background: var(--navy-950); color: var(--paper-100); overflow-x: hidden; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; letter-spacing: -0.02em; }
+p { text-wrap: pretty; }
 
-/* NAV */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
+}
+
+/* ===== NAV ===== */
 nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 1.4rem 4rem;
-  background: linear-gradient(to bottom, rgba(8,14,28,0.85) 0%, transparent 100%);
+  padding: 1.1rem 2.5rem;
+  background: oklch(0.14 0.045 256 / 0.82);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid oklch(1 0 0 / 0.06);
 }
-.nav-logo { font-family: var(--serif); font-size: 1.4rem; font-weight: 600; color: var(--white); letter-spacing: 0.03em; text-decoration: none; }
-.nav-links { display: flex; gap: 2.5rem; list-style: none; }
-.nav-links a { font-size: 0.78rem; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-.nav-links a:hover { color: var(--white); }
+.nav-logo { font-family: var(--display); font-weight: 700; font-size: 1.25rem; color: var(--paper-100); letter-spacing: -0.01em; text-decoration: none; }
+.nav-links { display: flex; gap: 2.25rem; list-style: none; }
+.nav-links a { font-size: 0.82rem; font-weight: 500; color: var(--muted-on-dark); text-decoration: none; transition: color 0.2s var(--ease); }
+.nav-links a:hover { color: var(--paper-100); }
 .nav-download {
-  display: none;
-  background: var(--sun); color: var(--navy-deep);
-  font-size: 0.75rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
-  padding: 0.55rem 1.1rem; border-radius: 100px; text-decoration: none;
-  white-space: nowrap;
+  background: var(--gold-400); color: var(--navy-950); font-weight: 600; font-size: 0.82rem;
+  padding: 0.55rem 1.2rem; border-radius: 100px; text-decoration: none; white-space: nowrap;
 }
-@media (max-width: 900px) {
-  nav { padding: 1.1rem 1.5rem; background: rgba(8,14,28,0.95); }
-  .nav-download { display: inline-flex; }
-}
+@media (max-width: 860px) { .nav-links { display: none; } nav { padding: 1rem 1.4rem; } }
 
-/* HERO */
+/* ===== HERO (night) ===== */
 .hero {
-  min-height: 100vh; position: relative;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  text-align: center; overflow: hidden; background: var(--navy-deep);
+  min-height: 100vh; position: relative; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center; overflow: hidden;
+  background: var(--navy-950);
 }
-.hero-sky {
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse 100% 55% at 50% 100%, rgba(240,160,32,0.22) 0%, rgba(232,120,32,0.08) 30%, transparent 60%),
-    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(74,143,212,0.4) 0%, rgba(42,107,191,0.2) 40%, transparent 70%),
-    linear-gradient(to top, var(--navy-mid) 0%, var(--navy-dark) 45%, var(--navy-deep) 100%);
-}
-.hero-horizon-glow {
-  position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
-  background: linear-gradient(90deg, transparent 0%, transparent 20%, rgba(245,194,50,0.7) 40%, rgba(245,194,50,1) 50%, rgba(245,194,50,0.7) 60%, transparent 80%, transparent 100%);
-  animation: horizonPulse 3s ease-in-out infinite;
-}
-@keyframes horizonPulse { 0%,100%{opacity:0.7} 50%{opacity:1} }
 .hero-glow {
-  position: absolute; bottom: -8%; left: 50%; transform: translateX(-50%);
-  width: 900px; height: 400px;
-  background: radial-gradient(ellipse, rgba(74,143,212,0.12) 0%, rgba(42,107,191,0.06) 45%, transparent 70%);
-  border-radius: 50%; pointer-events: none;
+  position: absolute; bottom: -10%; left: 50%; transform: translateX(-50%);
+  width: 900px; height: 420px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(ellipse, oklch(0.82 0.15 82 / 0.28) 0%, oklch(0.68 0.16 55 / 0.12) 45%, transparent 70%);
+  animation: glowPulse 4s ease-in-out infinite;
 }
+@keyframes glowPulse { 0%,100% { opacity: 0.75; } 50% { opacity: 1; } }
 .hero-stars { position: absolute; inset: 0; pointer-events: none; }
-.star { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.8); animation: twinkle var(--d,3s) ease-in-out infinite var(--delay,0s); }
-@keyframes twinkle { 0%,100%{opacity:0.15} 50%{opacity:0.85} }
-.hero-content { position: relative; z-index: 2; max-width: 880px; padding: 2rem; animation: fadeUp 0.9s ease both; }
-@keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
-.hero-eyebrow { font-size: 0.72rem; font-weight: 400; letter-spacing: 0.24em; text-transform: uppercase; color: var(--sun); margin-bottom: 1.5rem; animation: fadeUp 0.9s ease 0.1s both; }
-.hero-title { font-family: var(--serif); font-size: clamp(4rem, 9vw, 7.5rem); font-weight: 300; line-height: 0.95; color: var(--white); letter-spacing: -0.01em; margin-bottom: 1.75rem; animation: fadeUp 0.9s ease 0.2s both; }
-.hero-title em { font-style: italic; color: var(--sun); display: block; }
-.hero-sub { font-size: 1.1rem; font-weight: 300; line-height: 1.75; color: var(--muted); max-width: 540px; margin: 0 auto 2.75rem; animation: fadeUp 0.9s ease 0.3s both; }
-.hero-cta-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.9s ease 0.4s both; }
-.btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--sun); color: var(--navy-deep); font-family: var(--sans); font-size: 0.83rem; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; padding: 1rem 2.25rem; border-radius: 100px; border: none; cursor: pointer; text-decoration: none; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; box-shadow: 0 0 32px rgba(245,194,50,0.28); }
-.btn-primary:hover { background: #ffd060; transform: translateY(-2px); box-shadow: 0 0 48px rgba(245,194,50,0.45); }
-.btn-ghost { display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: var(--sky-pale); font-family: var(--sans); font-size: 0.83rem; font-weight: 400; letter-spacing: 0.07em; text-transform: uppercase; padding: 1rem 2rem; border-radius: 100px; border: 1px solid rgba(123,184,245,0.25); cursor: pointer; text-decoration: none; transition: border-color 0.2s, color 0.2s; }
-.btn-ghost:hover { border-color: rgba(123,184,245,0.6); color: var(--white); }
-.hero-scroll-hint { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; animation: fadeUp 0.9s ease 0.9s both; }
-.hero-scroll-hint span { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
-.scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(123,184,245,0.6), transparent); animation: scrollAnim 2s ease-in-out infinite; }
-@keyframes scrollAnim { 0%{transform:scaleY(0);transform-origin:top} 50%{transform:scaleY(1);transform-origin:top} 51%{transform-origin:bottom} 100%{transform:scaleY(0);transform-origin:bottom} }
+.star { position: absolute; border-radius: 50%; background: oklch(1 0 0 / 0.85); animation: twinkle var(--d,3s) ease-in-out infinite var(--delay,0s); }
+@keyframes twinkle { 0%,100% { opacity: 0.15; } 50% { opacity: 0.85; } }
 
-/* MARQUEE */
-.marquee-strip { background: var(--sun); padding: 0.9rem 0; overflow: hidden; white-space: nowrap; }
-.marquee-inner { display: inline-flex; animation: marquee 24s linear infinite; }
-@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-.marquee-item { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--navy-deep); padding: 0 2.5rem; }
-.marquee-dot { color: var(--sun-warm); padding: 0 0.4rem; }
+.horizon-svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 140px; }
 
-/* CONCEPT */
-.concept { padding: 9rem 4rem; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
-.concept-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sky-mid); margin-bottom: 1.25rem; }
-.concept-title { font-family: var(--serif); font-size: clamp(2.8rem, 4.5vw, 4rem); font-weight: 300; line-height: 1.1; color: var(--white); margin-bottom: 1.5rem; }
-.concept-title em { font-style: italic; color: var(--sun); }
-.concept-body { font-size: 1rem; line-height: 1.85; color: var(--muted); font-weight: 300; margin-bottom: 1.25rem; }
+.hero-content { position: relative; z-index: 2; max-width: 880px; padding: 2rem; animation: heroIn 1s var(--ease) both; }
+@keyframes heroIn { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+.hero-eyebrow { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue-300); margin-bottom: 1.5rem; }
+.hero-title { font-size: clamp(2.75rem, 7vw, 5.5rem); font-weight: 900; line-height: 0.98; color: var(--paper-100); margin-bottom: 1.75rem; }
+.hero-title .accent { color: var(--gold-300); display: block; }
+.hero-sub { font-size: 1.1rem; line-height: 1.7; color: var(--muted-on-dark); max-width: 540px; margin: 0 auto 2.75rem; }
+.hero-cta-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
-/* PHONE */
-.concept-visual { position: relative; display: flex; align-items: center; justify-content: center; min-height: 620px; }
-.phone-orbit { position: absolute; border-radius: 50%; border: 1px solid rgba(74,143,212,0.14); animation: spin 20s linear infinite; width: 420px; height: 420px; }
-.phone-orbit-2 { width: 530px; height: 530px; border-color: rgba(74,143,212,0.07); animation-duration: 30s; animation-direction: reverse; }
-@keyframes spin { from{transform:rotate(0)} to{transform:rotate(360deg)} }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--gold-400); color: var(--navy-950); font-weight: 600; font-size: 0.92rem;
+  padding: 1rem 2.1rem; border-radius: 100px; border: none; cursor: pointer; text-decoration: none;
+  box-shadow: 0 0 0 0 oklch(0.82 0.15 82 / 0.4);
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), background 0.25s var(--ease);
+}
+.btn-primary:hover { background: var(--gold-300); transform: translateY(-2px); box-shadow: 0 8px 32px oklch(0.82 0.15 82 / 0.35); }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: var(--blue-300);
+  font-weight: 500; font-size: 0.92rem; padding: 1rem 1.9rem; border-radius: 100px;
+  border: 1px solid oklch(0.78 0.08 230 / 0.3); cursor: pointer; text-decoration: none;
+  transition: border-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+.btn-ghost:hover { border-color: oklch(0.78 0.08 230 / 0.65); color: var(--paper-100); }
+
+.scroll-hint { position: absolute; bottom: 2.25rem; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+.scroll-hint span { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted-on-dark); }
+.scroll-line { width: 1px; height: 36px; background: linear-gradient(to bottom, oklch(0.78 0.08 230 / 0.6), transparent); animation: scrollLine 2s ease-in-out infinite; }
+@keyframes scrollLine { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+
+/* ===== MARQUEE (gold — first bold hit) ===== */
+.marquee { background: var(--gold-400); padding: 0.9rem 0; overflow: hidden; white-space: nowrap; }
+.marquee-track { display: inline-flex; animation: marquee 24s linear infinite; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee-item { font-family: var(--display); font-weight: 700; font-size: 0.78rem; letter-spacing: 0.04em; color: var(--navy-950); padding: 0 2.25rem; }
+.marquee-dot { color: var(--amber-ink); padding: 0 0.5rem; }
+
+/* ===== CONCEPT (navy-800) ===== */
+.concept { background: var(--navy-800); padding: clamp(5rem, 9vw, 9rem) clamp(1.5rem, 5vw, 4rem); }
+.concept-grid { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(2.5rem, 6vw, 6rem); align-items: center; }
+.concept-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-300); margin-bottom: 1.25rem; }
+.concept-title { font-size: clamp(2.25rem, 4.5vw, 3.6rem); font-weight: 900; line-height: 1.05; color: var(--paper-100); margin-bottom: 1.5rem; }
+.concept-title .accent { color: var(--gold-300); }
+.concept-body { font-size: 1.02rem; line-height: 1.8; color: var(--muted-on-dark); max-width: 58ch; margin-bottom: 1.1rem; }
+
+.concept-visual { position: relative; display: flex; align-items: center; justify-content: center; min-height: 600px; }
+.phone-orbit { position: absolute; border-radius: 50%; border: 1px solid oklch(0.78 0.08 230 / 0.14); animation: spin 22s linear infinite; width: 420px; height: 420px; }
+.phone-orbit-2 { width: 530px; height: 530px; border-color: oklch(0.78 0.08 230 / 0.07); animation-duration: 32s; animation-direction: reverse; }
+@keyframes spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
 
 .phone-shell {
-  position: relative; z-index: 2;
-  width: 280px;
-  background: linear-gradient(160deg, #2C3A52 0%, #1A2438 40%, #111828 100%);
-  border-radius: 52px;
-  padding: 10px;
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,0.08),
-    inset 0 1px 0 rgba(255,255,255,0.12),
-    0 40px 80px rgba(4,8,18,0.75),
-    0 8px 24px rgba(4,8,18,0.5),
-    0 0 80px rgba(74,143,212,0.08);
+  position: relative; z-index: 2; width: 280px;
+  background: linear-gradient(160deg, oklch(0.3 0.04 250) 0%, oklch(0.18 0.04 252) 40%, oklch(0.12 0.03 254) 100%);
+  border-radius: 52px; padding: 10px;
+  box-shadow: 0 0 0 1px oklch(1 0 0 / 0.08), inset 0 1px 0 oklch(1 0 0 / 0.12), 0 40px 80px oklch(0.05 0.02 255 / 0.7), 0 0 80px oklch(0.52 0.13 246 / 0.1);
 }
-
-.phone-btn-vol {
-  position: absolute; left: -3px; top: 110px;
-  width: 3px; height: 34px;
-  background: linear-gradient(to right, #1A2438, #2C3A52);
-  border-radius: 2px 0 0 2px;
-  box-shadow: 0 38px 0 rgba(74,143,212,0.0), inset 0 1px 0 rgba(255,255,255,0.1);
-}
-.phone-btn-vol::after {
-  content: ''; position: absolute; top: 48px;
-  width: 3px; height: 34px;
-  background: inherit; border-radius: inherit;
-  left: 0;
-}
-.phone-btn-power {
-  position: absolute; right: -3px; top: 130px;
-  width: 3px; height: 52px;
-  background: linear-gradient(to left, #1A2438, #2C3A52);
-  border-radius: 0 2px 2px 0;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
-}
-
-.phone-bezel {
-  background: #060C18;
-  border-radius: 44px;
-  overflow: hidden;
-  position: relative;
-}
-
-.phone-status {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 14px 22px 6px;
-  position: relative; z-index: 3;
-}
-.phone-time { font-size: 13px; font-weight: 500; color: #fff; letter-spacing: 0.01em; font-family: var(--sans); }
+.phone-btn-vol { position: absolute; left: -3px; top: 110px; width: 3px; height: 34px; background: linear-gradient(to right, oklch(0.18 0.04 252), oklch(0.3 0.04 250)); border-radius: 2px 0 0 2px; }
+.phone-btn-vol::after { content: ''; position: absolute; top: 48px; width: 3px; height: 34px; background: inherit; border-radius: inherit; left: 0; }
+.phone-btn-power { position: absolute; right: -3px; top: 130px; width: 3px; height: 52px; background: linear-gradient(to left, oklch(0.18 0.04 252), oklch(0.3 0.04 250)); border-radius: 0 2px 2px 0; }
+.phone-bezel { background: #06070d; border-radius: 44px; overflow: hidden; position: relative; }
+.phone-status { display: flex; align-items: center; justify-content: space-between; padding: 14px 22px 6px; position: relative; z-index: 3; }
+.phone-time { font-family: var(--body); font-size: 13px; font-weight: 600; color: #fff; }
 .phone-icons { display: flex; align-items: center; gap: 5px; }
 .phone-signal { display: flex; align-items: flex-end; gap: 1.5px; height: 10px; }
-.phone-signal span { background: rgba(255,255,255,0.9); border-radius: 1px; width: 2.5px; }
-.phone-signal span:nth-child(1){ height: 30%; }
-.phone-signal span:nth-child(2){ height: 55%; }
-.phone-signal span:nth-child(3){ height: 80%; }
-.phone-signal span:nth-child(4){ height: 100%; }
-.phone-wifi { font-size: 10px; color: rgba(255,255,255,0.9); }
-.phone-battery {
-  width: 22px; height: 11px; border: 1.5px solid rgba(255,255,255,0.7);
-  border-radius: 2.5px; position: relative;
-}
-.phone-battery::before {
-  content: ''; position: absolute; right: -4px; top: 50%; transform: translateY(-50%);
-  width: 2px; height: 5px; background: rgba(255,255,255,0.5); border-radius: 0 1px 1px 0;
-}
-.phone-battery::after {
-  content: ''; position: absolute; inset: 2px; right: 3px;
-  background: rgba(255,255,255,0.9); border-radius: 1px;
-}
-
-.phone-island {
-  position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
-  width: 92px; height: 28px;
-  background: #000; border-radius: 20px; z-index: 4;
-}
-
-.phone-screen-content {
-  padding: 0 0 16px;
-  background: #000;
-  min-height: 530px;
-  display: flex; flex-direction: column;
-}
-.app-top-bar {
-  padding: 6px 16px 12px;
-}
-.app-close-btn {
-  display: inline-flex; align-items: center; justify-content: center;
-  background: #2C2C2E; color: #fff; font-size: 13px; font-weight: 400;
-  padding: 6px 14px; border-radius: 20px; font-family: var(--sans);
-  margin-bottom: 14px;
-}
-.app-main-title {
-  font-family: var(--sans); font-size: 26px; font-weight: 700;
-  color: #fff; line-height: 1.1; letter-spacing: -0.3px;
-}
-.app-banner {
-  display: flex; align-items: center; gap: 12px;
-  background: #1C2D44; border-radius: 14px;
-  padding: 14px 16px; margin: 0 16px 16px;
-}
+.phone-signal span { background: oklch(1 0 0 / 0.9); border-radius: 1px; width: 2.5px; }
+.phone-signal span:nth-child(1) { height: 30%; } .phone-signal span:nth-child(2) { height: 55%; }
+.phone-signal span:nth-child(3) { height: 80%; } .phone-signal span:nth-child(4) { height: 100%; }
+.phone-wifi { font-size: 10px; color: oklch(1 0 0 / 0.9); }
+.phone-battery { width: 22px; height: 11px; border: 1.5px solid oklch(1 0 0 / 0.7); border-radius: 2.5px; position: relative; }
+.phone-battery::before { content: ''; position: absolute; right: -4px; top: 50%; transform: translateY(-50%); width: 2px; height: 5px; background: oklch(1 0 0 / 0.5); border-radius: 0 1px 1px 0; }
+.phone-battery::after { content: ''; position: absolute; inset: 2px; right: 3px; background: oklch(1 0 0 / 0.9); border-radius: 1px; }
+.phone-island { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 92px; height: 28px; background: #000; border-radius: 20px; z-index: 4; }
+.phone-screen-content { padding: 0 0 16px; background: #000; min-height: 530px; display: flex; flex-direction: column; }
+.app-top-bar { padding: 6px 16px 12px; }
+.app-close-btn { display: inline-flex; align-items: center; justify-content: center; background: #26262a; color: #fff; font-family: var(--body); font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 20px; margin-bottom: 14px; }
+.app-main-title { font-family: var(--display); font-size: 25px; font-weight: 900; color: #fff; line-height: 1.1; letter-spacing: -0.01em; }
+.app-banner { display: flex; align-items: center; gap: 12px; background: oklch(0.3 0.06 248); border-radius: 14px; padding: 14px 16px; margin: 0 16px 16px; }
 .app-banner-icon { font-size: 22px; flex-shrink: 0; }
-.app-banner-text-title { font-size: 14px; font-weight: 600; color: #fff; font-family: var(--sans); }
-.app-banner-text-sub { font-size: 12px; color: rgba(180,210,255,0.55); font-family: var(--sans); margin-top: 1px; }
-
+.app-banner-text-title { font-family: var(--body); font-size: 14px; font-weight: 600; color: #fff; }
+.app-banner-text-sub { font-family: var(--body); font-size: 12px; color: oklch(0.78 0.08 230 / 0.65); margin-top: 1px; }
 .task-list { flex: 1; padding: 0 16px; }
-.task-row {
-  display: flex; align-items: center; gap: 12px;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
+.task-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid oklch(1 0 0 / 0.06); }
 .task-row:last-child { border-bottom: none; }
-.task-icon-box {
-  width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0;
-  background: #1C2D44;
-  display: flex; align-items: center; justify-content: center; font-size: 22px;
-}
+.task-icon-box { width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0; background: oklch(0.3 0.06 248); display: flex; align-items: center; justify-content: center; font-size: 22px; }
 .task-info { flex: 1; min-width: 0; }
-.task-name { font-size: 14px; font-weight: 600; color: #fff; font-family: var(--sans); line-height: 1.3; }
-.task-desc { font-size: 12px; color: rgba(255,255,255,0.45); font-family: var(--sans); margin-top: 1px; }
-.task-reward { font-size: 12px; color: #4A8FD4; font-family: var(--sans); font-weight: 500; margin-top: 2px; }
-.task-check {
-  width: 24px; height: 24px; border-radius: 50%;
-  border: 2px solid #4A8FD4; flex-shrink: 0;
-}
+.task-name { font-family: var(--body); font-size: 14px; font-weight: 600; color: #fff; line-height: 1.3; }
+.task-desc { font-family: var(--body); font-size: 12px; color: oklch(1 0 0 / 0.45); margin-top: 1px; }
+.task-reward { font-family: var(--body); font-size: 12px; color: var(--gold-300); font-weight: 600; margin-top: 2px; }
+.task-check { width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--gold-300); flex-shrink: 0; }
+.phone-home-indicator { width: 120px; height: 4px; background: oklch(1 0 0 / 0.22); border-radius: 2px; margin: 12px auto 0; }
 
-.phone-home-indicator {
-  width: 120px; height: 4px; background: rgba(255,255,255,0.22);
-  border-radius: 2px; margin: 12px auto 0;
-}
+/* ===== HOW IT WORKS (blue-600) ===== */
+.how { background: var(--blue-600); padding: clamp(5rem, 9vw, 9rem) clamp(1.5rem, 5vw, 4rem); position: relative; overflow: hidden; }
+.section-header { text-align: center; margin-bottom: clamp(3rem, 6vw, 5rem); }
+.section-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue-300); margin-bottom: 1.1rem; display: block; }
+.section-title { font-size: clamp(2.1rem, 4vw, 3.4rem); font-weight: 900; color: var(--paper-100); line-height: 1.1; }
+.section-title .accent { color: var(--gold-300); }
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); max-width: 1120px; margin: 0 auto; position: relative; gap: 1rem; }
+.steps::before { content: ''; position: absolute; top: 2.6rem; left: calc(100%/8); right: calc(100%/8); height: 1px; background: linear-gradient(90deg, transparent, oklch(1 0 0 / 0.25) 20%, oklch(1 0 0 / 0.25) 80%, transparent); }
+.step { padding: 1.5rem 1.25rem; text-align: center; }
+.step-num { width: 52px; height: 52px; border-radius: 50%; border: 1.5px solid var(--blue-300); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-family: var(--display); font-size: 1.15rem; font-weight: 700; color: var(--blue-300); background: var(--blue-600); }
+.step-emoji { font-size: 1.4rem; display: block; margin-bottom: 1rem; }
+.step-title { font-size: 1.3rem; font-weight: 700; color: var(--paper-100); margin-bottom: 0.65rem; line-height: 1.2; }
+.step-body { font-size: 0.9rem; line-height: 1.65; color: oklch(0.92 0.03 230 / 0.85); }
 
-/* HOW IT WORKS */
-.how { background: linear-gradient(170deg, #0A1628 0%, #0D1E3A 50%, #080E1C 100%); padding: 9rem 4rem; position: relative; overflow: hidden; }
-.how::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 700px; height: 250px; background: radial-gradient(ellipse, rgba(74,143,212,0.07) 0%, transparent 70%); pointer-events: none; }
-.section-header { text-align: center; margin-bottom: 5rem; }
-.section-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sky-mid); margin-bottom: 1.25rem; display: block; }
-.section-title { font-family: var(--serif); font-size: clamp(2.4rem, 4vw, 3.5rem); font-weight: 300; color: var(--white); line-height: 1.1; }
-.section-title em { font-style: italic; color: var(--sun); }
-.steps { display: grid; max-width: 1100px; margin: 0 auto; position: relative; }
-.steps::before { content: ''; position: absolute; top: 2.6rem; left: calc(100%/8); right: calc(100%/8); height: 1px; background: linear-gradient(90deg, transparent, rgba(74,143,212,0.3) 20%, rgba(74,143,212,0.3) 80%, transparent); }
-.step { padding: 2rem 2.5rem; text-align: center; }
-.step-num { width: 52px; height: 52px; border-radius: 50%; border: 1px solid rgba(74,143,212,0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.75rem; font-family: var(--serif); font-size: 1.2rem; font-weight: 300; color: var(--sky-mid); background: var(--navy-dark); }
-.step-emoji { font-size: 1.35rem; display: block; margin-bottom: 1rem; }
-.step-title { font-family: var(--serif); font-size: 1.5rem; font-weight: 300; color: var(--white); margin-bottom: 0.75rem; line-height: 1.2; }
-.step-body { font-size: 0.87rem; line-height: 1.75; color: var(--muted); font-weight: 300; }
+/* ===== WHY (cream-50 — day breaks) ===== */
+.why { background: var(--cream-50); padding: clamp(5rem, 9vw, 9rem) clamp(1.5rem, 5vw, 4rem); }
+.why .section-label { color: var(--blue-ink); }
+.why .section-title { color: var(--ink-900); }
+.why .section-title .accent { color: var(--amber-ink); }
+.why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 1100px; margin: 0 auto; }
+.why-card { background: oklch(1 0 0); border: 1px solid oklch(0.46 0.14 55 / 0.14); border-radius: 22px; padding: 2.5rem 2.1rem; transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease); }
+.why-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px oklch(0.16 0.03 256 / 0.08); }
+.why-icon { font-size: 1.75rem; margin-bottom: 1.4rem; display: block; }
+.why-title { font-size: 1.5rem; font-weight: 700; color: var(--ink-900); margin-bottom: 0.7rem; line-height: 1.2; }
+.why-body { font-size: 0.92rem; line-height: 1.75; color: var(--ink-700); }
 
-/* WHY */
-.why { padding: 9rem 4rem; background: var(--navy-dark); }
-.why-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; max-width: 1100px; margin: 5rem auto 0; }
-.why-card { background: rgba(74,143,212,0.05); border: 1px solid rgba(74,143,212,0.12); border-radius: 20px; padding: 2.75rem 2.25rem; transition: background 0.3s, border-color 0.3s, transform 0.3s; }
-.why-card:hover { background: rgba(74,143,212,0.09); border-color: rgba(74,143,212,0.28); transform: translateY(-4px); }
-.why-icon { font-size: 1.75rem; margin-bottom: 1.5rem; display: block; }
-.why-title { font-family: var(--serif); font-size: 1.6rem; font-weight: 300; color: var(--white); margin-bottom: 0.75rem; line-height: 1.2; }
-.why-body { font-size: 0.88rem; line-height: 1.8; color: var(--muted); font-weight: 300; }
+/* ===== PRICING (cream-50) ===== */
+.pricing { background: var(--skytint-50); padding: clamp(5rem, 9vw, 9rem) clamp(1.5rem, 5vw, 4rem); }
+.pricing .section-label { color: var(--amber-ink); }
+.pricing .section-title { color: var(--ink-900); }
+.pricing .section-title .accent { color: var(--amber-ink); }
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 700px; margin: 0 auto; }
+.pricing-card { background: oklch(1 0 0); border: 1px solid oklch(0.42 0.13 246 / 0.12); border-radius: 24px; padding: 2.5rem 2.25rem; position: relative; transition: transform 0.3s var(--ease); }
+.pricing-card:hover { transform: translateY(-3px); }
+.pricing-card.featured { background: var(--navy-950); border: none; }
+.pricing-badge { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--gold-400); color: var(--navy-950); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 14px; border-radius: 20px; white-space: nowrap; }
+.pricing-period { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-ink); margin-bottom: 1rem; }
+.pricing-card.featured .pricing-period { color: var(--blue-300); }
+.pricing-price { font-family: var(--display); font-size: 3.4rem; font-weight: 900; color: var(--ink-900); line-height: 1; margin-bottom: 0.3rem; }
+.pricing-card.featured .pricing-price { color: var(--paper-100); }
+.pricing-price sup { font-size: 1.4rem; font-family: var(--body); font-weight: 600; vertical-align: super; }
+.pricing-per { font-size: 0.85rem; color: var(--ink-700); margin-bottom: 1.5rem; }
+.pricing-card.featured .pricing-per { color: var(--muted-on-dark); }
+.pricing-saving { font-size: 0.85rem; color: var(--amber-ink); font-weight: 600; margin-bottom: 1.75rem; min-height: 1.2em; }
+.pricing-card.featured .pricing-saving { color: var(--gold-300); }
+.pricing-features { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+.pricing-features li { font-size: 0.9rem; color: var(--ink-700); display: flex; align-items: center; gap: 0.6rem; }
+.pricing-card.featured .pricing-features li { color: var(--muted-on-dark); }
+.pricing-features li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--blue-ink); flex-shrink: 0; }
+.pricing-card.featured .pricing-features li::before { background: var(--gold-300); }
+.pricing-note { text-align: center; margin-top: 2.25rem; font-size: 0.85rem; color: var(--ink-700); }
+.pricing-note a { color: var(--blue-ink); text-decoration: none; font-weight: 600; }
 
-/* PRICING */
-.pricing { padding: 9rem 4rem; background: var(--navy-dark); }
-.pricing-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 1.5rem; max-width: 680px; margin: 5rem auto 0;
-}
-.pricing-card {
-  background: rgba(74,143,212,0.05);
-  border: 1px solid rgba(74,143,212,0.15);
-  border-radius: 24px; padding: 2.5rem 2.25rem;
-  position: relative; transition: border-color 0.3s, background 0.3s;
-}
-.pricing-card:hover { background: rgba(74,143,212,0.09); border-color: rgba(74,143,212,0.3); }
-.pricing-card.featured {
-  background: rgba(74,143,212,0.1);
-  border: 2px solid var(--sky-mid);
-}
-.pricing-badge {
-  position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
-  background: var(--sun); color: var(--navy-deep);
-  font-size: 0.68rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 4px 14px; border-radius: 20px; white-space: nowrap;
-}
-.pricing-period { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--sky-mid); margin-bottom: 1rem; }
-.pricing-price { font-family: var(--serif); font-size: 3.5rem; font-weight: 300; color: var(--white); line-height: 1; margin-bottom: 0.25rem; }
-.pricing-price sup { font-size: 1.5rem; vertical-align: super; font-family: var(--sans); font-weight: 300; }
-.pricing-per { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.5rem; }
-.pricing-saving { font-size: 0.82rem; color: var(--sun); font-weight: 500; margin-bottom: 1.75rem; min-height: 1.2em; }
-.pricing-features { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-.pricing-features li { font-size: 0.88rem; color: var(--muted); display: flex; align-items: center; gap: 0.6rem; }
-.pricing-features li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--sky-mid); flex-shrink: 0; }
-.pricing-note { text-align: center; margin-top: 2rem; font-size: 0.82rem; color: var(--muted); }
-.pricing-note a { color: var(--sky-light); text-decoration: none; }
-
-/* CTA */
-.cta-section { padding: 10rem 4rem; text-align: center; background: var(--navy-deep); position: relative; overflow: hidden; }
-.cta-bg-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 700px; height: 500px; background: radial-gradient(ellipse, rgba(74,143,212,0.1) 0%, rgba(42,107,191,0.04) 50%, transparent 70%); pointer-events: none; }
-.cta-bg-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-family: var(--serif); font-size: 22vw; font-weight: 300; color: rgba(74,143,212,0.04); white-space: nowrap; pointer-events: none; }
-.cta-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sky-mid); display: block; margin-bottom: 1.5rem; }
-.cta-title { font-family: var(--serif); font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 300; color: var(--white); line-height: 1.05; margin-bottom: 1.5rem; }
-.cta-title em { font-style: italic; color: var(--sun); }
-.cta-sub { font-size: 1rem; color: var(--muted); font-weight: 300; margin-bottom: 3rem; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.7; }
-.store-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-.store-btn { display: inline-flex; align-items: center; gap: 0.85rem; background: rgba(74,143,212,0.1); border: 1px solid rgba(74,143,212,0.25); color: var(--white); text-decoration: none; padding: 0.95rem 2rem; border-radius: 16px; transition: background 0.2s, border-color 0.2s, transform 0.15s; }
-.store-btn:hover { background: rgba(74,143,212,0.2); border-color: rgba(123,184,245,0.45); transform: translateY(-2px); }
+/* ===== CTA (gold-300, climax) ===== */
+.cta-section { background: var(--gold-300); padding: clamp(6rem, 10vw, 10rem) clamp(1.5rem, 5vw, 4rem); text-align: center; position: relative; overflow: hidden; }
+.cta-bg-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: var(--display); font-size: 22vw; font-weight: 900; color: oklch(0.14 0.045 256 / 0.05); white-space: nowrap; pointer-events: none; }
+.cta-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--amber-ink); display: block; margin-bottom: 1.5rem; position: relative; }
+.cta-title { font-size: clamp(2.6rem, 6vw, 5rem); font-weight: 900; color: var(--navy-950); line-height: 1.02; margin-bottom: 1.5rem; position: relative; }
+.cta-sub { font-size: 1.02rem; color: oklch(0.14 0.045 256 / 0.7); margin-bottom: 2.75rem; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.7; position: relative; }
+.store-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; }
+.store-btn { display: inline-flex; align-items: center; gap: 0.85rem; background: var(--navy-950); border: none; color: var(--paper-100); text-decoration: none; padding: 0.95rem 2rem; border-radius: 16px; transition: transform 0.25s var(--ease), background 0.25s var(--ease); }
+.store-btn:hover { background: var(--navy-800); transform: translateY(-2px); }
 .store-icon { font-size: 1.5rem; }
-.store-text-sm { font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); line-height: 1; display: block; margin-bottom: 0.15rem; }
-.store-text-lg { font-size: 1rem; font-weight: 500; line-height: 1; display: block; }
+.store-text-sm { font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-on-dark); line-height: 1; display: block; margin-bottom: 0.15rem; }
+.store-text-lg { font-size: 1rem; font-weight: 700; line-height: 1; display: block; font-family: var(--display); }
 
-/* FOOTER */
-footer { background: #050A14; padding: 2.75rem 4rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; border-top: 1px solid rgba(74,143,212,0.1); }
-.footer-logo { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; color: rgba(238,244,255,0.7); letter-spacing: 0.03em; }
+/* ===== FOOTER (navy — night returns) ===== */
+footer { background: var(--navy-950); padding: 2.75rem 2.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; border-top: 1px solid oklch(1 0 0 / 0.06); }
+.footer-logo { font-family: var(--display); font-size: 1.2rem; font-weight: 700; color: oklch(1 0 0 / 0.75); }
 .footer-links { display: flex; gap: 2rem; list-style: none; }
-.footer-links a { font-size: 0.75rem; color: rgba(238,244,255,0.25); text-decoration: none; letter-spacing: 0.08em; transition: color 0.2s; }
-.footer-links a:hover { color: rgba(238,244,255,0.6); }
-.footer-copy { font-size: 0.75rem; color: rgba(238,244,255,0.2); letter-spacing: 0.04em; }
+.footer-links a { font-size: 0.8rem; color: oklch(1 0 0 / 0.35); text-decoration: none; transition: color 0.2s var(--ease); }
+.footer-links a:hover { color: oklch(1 0 0 / 0.75); }
+.footer-copy { font-size: 0.78rem; color: oklch(1 0 0 / 0.25); }
 
-/* RESPONSIVE */
+/* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
-  nav { padding: 1.25rem 2rem; }
-  .nav-links { display: none; }
-  .concept { grid-template-columns: 1fr; padding: 6rem 2rem; gap: 3rem; }
+  .concept-grid { grid-template-columns: 1fr; }
   .concept-visual { order: -1; }
-  .how, .why, .cta-section, .pricing { padding: 6rem 2rem; }
-  .steps { grid-template-columns: 1fr 1fr !important; }
-  .why-grid { grid-template-columns: 1fr; }
-  .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
-  footer { flex-direction: column; text-align: center; }
+  .steps { grid-template-columns: 1fr 1fr; }
+  .steps::before { display: none; }
   .phone-orbit, .phone-orbit-2 { display: none; }
 }
-
 @media (max-width: 600px) {
-  .hero-title { font-size: 3.2rem; }
-  .hero-sub { font-size: 1rem; }
+  .hero-title { font-size: 2.85rem; }
   .hero-cta-row { flex-direction: column; align-items: center; }
   .btn-primary, .btn-ghost { width: 100%; max-width: 300px; justify-content: center; }
-  .concept { padding: 5rem 1.5rem; }
-  .how, .why, .cta-section, .pricing { padding: 5rem 1.5rem; }
-  .steps { grid-template-columns: 1fr !important; }
-  .steps::before { display: none; }
-  .section-title { font-size: 2.2rem; }
-  .concept-title { font-size: 2.4rem; }
-  .cta-title { font-size: 2.6rem; }
-  .marquee-item { font-size: 0.65rem; padding: 0 1.5rem; }
+  .steps { grid-template-columns: 1fr; }
   .phone-shell { width: 240px; }
   .app-main-title { font-size: 22px; }
-  footer { padding: 2rem 1.5rem; }
+  footer { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
   .footer-links { gap: 1.25rem; }
-  nav { padding: 1rem 1.5rem; }
-  .pricing-grid { padding: 0; }
 }
 </style>
 </head>
@@ -372,33 +277,36 @@ footer { background: #050A14; padding: 2.75rem 4rem; display: flex; align-items:
     <li><a href="#how">How it works</a></li>
     <li><a href="#why">Why us</a></li>
     <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#download">Download</a></li>
   </ul>
   <a class="nav-download" href="https://apps.apple.com/us/app/earlyrise/id6760259048">Download ↗</a>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-sky"></div>
-  <div class="hero-glow"></div>
   <div class="hero-stars" id="stars"></div>
-  <div class="hero-horizon-glow"></div>
+  <div class="hero-glow"></div>
+  <svg class="horizon-svg" viewBox="0 0 1440 140" preserveAspectRatio="none">
+    <path d="M0 110 Q 360 70 720 95 T 1440 100 V140 H0 Z" fill="oklch(0.27 0.06 254)" opacity="0.55"/>
+    <circle cx="720" cy="120" r="34" fill="oklch(0.82 0.15 82)" opacity="0.9"/>
+    <line x1="0" y1="118" x2="1440" y2="118" stroke="oklch(0.82 0.15 82 / 0.35)" stroke-width="1"/>
+  </svg>
+
   <div class="hero-content">
-    <p class="hero-eyebrow">Your phone. Your rules. Your morning.</p>
-    <h1 class="hero-title">Stop resisting.<em>Start earning.</em></h1>
-    <p class="hero-sub">Every other app punishes you for reaching for your phone. EarlyRise flips the script — earn your scroll time by completing real-world tasks first.</p>
+    <p class="hero-eyebrow">A smarter way to use your phone</p>
+    <h1 class="hero-title">Earn your<span class="accent">scroll time.</span></h1>
+    <p class="hero-sub">Before Instagram or TikTok opens, EarlyRise gives you a small real-world task — drink water, do 10 pushups, step outside. Complete it, and your feed unlocks. No blocks, no shame. Just momentum.</p>
     <div class="hero-cta-row">
       <a href="https://apps.apple.com/us/app/earlyrise/id6760259048" class="btn-primary">Get EarlyRise Free →</a>
       <a href="#how" class="btn-ghost">See how it works</a>
     </div>
   </div>
-  <div class="hero-scroll-hint">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
-  </div>
+
+  <div class="scroll-hint"><span>Scroll</span><div class="scroll-line"></div></div>
 </section>
 
-<div class="marquee-strip">
-  <div class="marquee-inner">
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
     <span class="marquee-item">Earn your scroll<span class="marquee-dot">◆</span></span>
     <span class="marquee-item">No shame, just momentum<span class="marquee-dot">◆</span></span>
     <span class="marquee-item">Real habits, real rewards<span class="marquee-dot">◆</span></span>
@@ -412,111 +320,13 @@ footer { background: #050A14; padding: 2.75rem 4rem; display: flex; align-items:
   </div>
 </div>
 
-<section class="concept">
-  <div>
-    <p class="concept-label">The idea</p>
-    <h2 class="concept-title">Not a wall.<br><em>A warmup.</em></h2>
-    <p class="concept-body">Screen time apps operate on guilt. They block, shame, and restrict — and then you override them anyway and feel worse about yourself.</p>
-    <p class="concept-body">EarlyRise works with your instincts, not against them. That urge to check your phone? It's the fuel that gets you drinking water, moving your body, stepping outside.</p>
-    <p class="concept-body">Your scroll time isn't taken away. It's waiting for you on the other side of a 30-second real-world task.</p>
-  </div>
-  <div class="concept-visual">
-    <div class="phone-orbit"></div>
-    <div class="phone-orbit phone-orbit-2"></div>
-
-    <div class="phone-shell">
-      <div class="phone-btn-vol"></div>
-      <div class="phone-btn-power"></div>
-
-      <div class="phone-bezel">
-        <div class="phone-status">
-          <span class="phone-time">9:41</span>
-          <div class="phone-icons">
-            <div class="phone-signal">
-              <span></span><span></span><span></span><span></span>
-            </div>
-            <span class="phone-wifi">&#x1F4F6;</span>
-            <div class="phone-battery"></div>
-          </div>
-        </div>
-
-        <div class="phone-island"></div>
-
-        <div class="phone-screen-content">
-          <div class="app-top-bar">
-            <div class="app-close-btn">Close</div>
-            <h2 class="app-main-title">Earn Scroll<br>Time</h2>
-          </div>
-
-          <div class="app-banner">
-            <span class="app-banner-icon">⚡</span>
-            <div>
-              <p class="app-banner-text-title">Complete a task</p>
-              <p class="app-banner-text-sub">Earn scroll time for real-world actions</p>
-            </div>
-          </div>
-
-          <div class="task-list">
-            <div class="task-row">
-              <div class="task-icon-box">🚶</div>
-              <div class="task-info">
-                <p class="task-name">Walk 5 Minutes</p>
-                <p class="task-desc">Step outside for a quick walk</p>
-                <p class="task-reward">+10 min scroll</p>
-              </div>
-              <div class="task-check"></div>
-            </div>
-            <div class="task-row">
-              <div class="task-icon-box">💧</div>
-              <div class="task-info">
-                <p class="task-name">Drink Water</p>
-                <p class="task-desc">Drink a full glass of water</p>
-                <p class="task-reward">+5 min scroll</p>
-              </div>
-              <div class="task-check"></div>
-            </div>
-            <div class="task-row">
-              <div class="task-icon-box">🧘</div>
-              <div class="task-info">
-                <p class="task-name">Stretch</p>
-                <p class="task-desc">Stretch for 2 minutes</p>
-                <p class="task-reward">+10 min scroll</p>
-              </div>
-              <div class="task-check"></div>
-            </div>
-            <div class="task-row">
-              <div class="task-icon-box">📖</div>
-              <div class="task-info">
-                <p class="task-name">Read</p>
-                <p class="task-desc">Read for 5 minutes</p>
-                <p class="task-reward">+10 min scroll</p>
-              </div>
-              <div class="task-check"></div>
-            </div>
-            <div class="task-row">
-              <div class="task-icon-box">🧹</div>
-              <div class="task-info">
-                <p class="task-name">Clean Something</p>
-                <p class="task-desc">Tidy up your space</p>
-                <p class="task-reward">+10 min scroll</p>
-              </div>
-              <div class="task-check"></div>
-            </div>
-          </div>
-
-          <div class="phone-home-indicator"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
+<!-- HOW IT WORKS -->
 <section class="how" id="how">
   <div class="section-header">
     <span class="section-label">How it works</span>
-    <h2 class="section-title">Four steps.<br><em>One better morning.</em></h2>
+    <h2 class="section-title">Four steps.<br><span class="accent">One better morning.</span></h2>
   </div>
-  <div class="steps" style="grid-template-columns:repeat(4,1fr)">
+  <div class="steps">
     <div class="step">
       <div class="step-num">01</div>
       <span class="step-emoji">📱</span>
@@ -533,7 +343,7 @@ footer { background: #050A14; padding: 2.75rem 4rem; display: flex; align-items:
       <div class="step-num">03</div>
       <span class="step-emoji">⚡</span>
       <h3 class="step-title">A small task pops up</h3>
-      <p class="step-body">Drink water. Do 10 pushups. Step outside for 60 seconds. Quick, doable, real-world actions that actually move the needle.</p>
+      <p class="step-body">Drink water. Do 10 pushups. Step outside for 60 seconds. Quick, doable, real-world actions that move the needle.</p>
     </div>
     <div class="step">
       <div class="step-num">04</div>
@@ -544,10 +354,84 @@ footer { background: #050A14; padding: 2.75rem 4rem; display: flex; align-items:
   </div>
 </section>
 
+<!-- CONCEPT -->
+<section class="concept">
+  <div class="concept-grid">
+    <div>
+      <p class="concept-label">The idea</p>
+      <h2 class="concept-title">Not a wall.<br><span class="accent">A warmup.</span></h2>
+      <p class="concept-body">Screen time apps operate on guilt. They block, shame, and restrict — and then you override them anyway and feel worse about yourself.</p>
+      <p class="concept-body">EarlyRise works with your instincts, not against them. That urge to check your phone? It's the fuel that gets you drinking water, moving your body, stepping outside.</p>
+      <p class="concept-body">Your scroll time isn't taken away. It's waiting on the other side of a 30-second real-world task.</p>
+    </div>
+    <div class="concept-visual">
+      <div class="phone-orbit"></div>
+      <div class="phone-orbit phone-orbit-2"></div>
+      <div class="phone-shell">
+        <div class="phone-btn-vol"></div>
+        <div class="phone-btn-power"></div>
+        <div class="phone-bezel">
+          <div class="phone-status">
+            <span class="phone-time">9:41</span>
+            <div class="phone-icons">
+              <div class="phone-signal"><span></span><span></span><span></span><span></span></div>
+              <span class="phone-wifi">&#x1F4F6;</span>
+              <div class="phone-battery"></div>
+            </div>
+          </div>
+          <div class="phone-island"></div>
+          <div class="phone-screen-content">
+            <div class="app-top-bar">
+              <div class="app-close-btn">Close</div>
+              <h2 class="app-main-title">Earn Scroll<br>Time</h2>
+            </div>
+            <div class="app-banner">
+              <span class="app-banner-icon">⚡</span>
+              <div>
+                <p class="app-banner-text-title">Complete a task</p>
+                <p class="app-banner-text-sub">Earn scroll time for real-world actions</p>
+              </div>
+            </div>
+            <div class="task-list">
+              <div class="task-row">
+                <div class="task-icon-box">🚶</div>
+                <div class="task-info"><p class="task-name">Walk 5 Minutes</p><p class="task-desc">Step outside for a quick walk</p><p class="task-reward">+10 min scroll</p></div>
+                <div class="task-check"></div>
+              </div>
+              <div class="task-row">
+                <div class="task-icon-box">💧</div>
+                <div class="task-info"><p class="task-name">Drink Water</p><p class="task-desc">Drink a full glass of water</p><p class="task-reward">+5 min scroll</p></div>
+                <div class="task-check"></div>
+              </div>
+              <div class="task-row">
+                <div class="task-icon-box">🧘</div>
+                <div class="task-info"><p class="task-name">Stretch</p><p class="task-desc">Stretch for 2 minutes</p><p class="task-reward">+10 min scroll</p></div>
+                <div class="task-check"></div>
+              </div>
+              <div class="task-row">
+                <div class="task-icon-box">📖</div>
+                <div class="task-info"><p class="task-name">Read</p><p class="task-desc">Read for 5 minutes</p><p class="task-reward">+10 min scroll</p></div>
+                <div class="task-check"></div>
+              </div>
+              <div class="task-row">
+                <div class="task-icon-box">🧹</div>
+                <div class="task-info"><p class="task-name">Clean Something</p><p class="task-desc">Tidy up your space</p><p class="task-reward">+10 min scroll</p></div>
+                <div class="task-check"></div>
+              </div>
+            </div>
+            <div class="phone-home-indicator"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
 <section class="why" id="why">
   <div class="section-header">
     <span class="section-label">Why EarlyRise</span>
-    <h2 class="section-title">Built on <em>momentum,</em><br>not restriction.</h2>
+    <h2 class="section-title">Built on <span class="accent">momentum,</span><br>not restriction.</h2>
   </div>
   <div class="why-grid">
     <div class="why-card">
@@ -568,57 +452,58 @@ footer { background: #050A14; padding: 2.75rem 4rem; display: flex; align-items:
   </div>
 </section>
 
+<!-- PRICING -->
 <section class="pricing" id="pricing">
   <div class="section-header">
     <span class="section-label">Pricing</span>
-    <h2 class="section-title">Simple, honest <em>pricing.</em></h2>
+    <h2 class="section-title">Simple, honest <span class="accent">pricing.</span></h2>
   </div>
   <div class="pricing-grid">
-
     <div class="pricing-card">
-      <p class="pricing-period">Monthly</p>
-      <p class="pricing-price"><sup>$</sup>2.99</p>
-      <p class="pricing-per">per month</p>
+      <p class="pricing-period">Free</p>
+      <p class="pricing-price"><sup>$</sup>0</p>
+      <p class="pricing-per">forever, no credit card</p>
       <p class="pricing-saving">&nbsp;</p>
       <ul class="pricing-features">
-        <li>Unlimited task unlocks</li>
-        <li>All app integrations</li>
-        <li>Custom task builder</li>
-        <li>Cancel any time</li>
+        <li>3 of 6 daily tasks (rest are locked)</li>
+        <li>Up to 60 min daily scroll budget</li>
+        <li>Up to 2 monitored apps</li>
+        <li>Time Reclaimed stat for your first 3 days</li>
+        <li>Streak tracking</li>
+        <li>Today's Summary in Settings</li>
       </ul>
     </div>
-
     <div class="pricing-card featured">
-      <div class="pricing-badge">Best value — 4 months free</div>
-      <p class="pricing-period">Annual</p>
-      <p class="pricing-price"><sup>$</sup>20</p>
-      <p class="pricing-per">per year — just $1.67/mo</p>
-      <p class="pricing-saving">You save $15.88 a year</p>
+      <div class="pricing-badge">Most popular</div>
+      <p class="pricing-period">Premium</p>
+      <p class="pricing-price"><sup>$</sup>19.99</p>
+      <p class="pricing-per">per year — or $2.99/month</p>
+      <p class="pricing-saving">Save $15.89 a year vs. monthly</p>
       <ul class="pricing-features">
-        <li>Everything in monthly</li>
-        <li>Priority support</li>
-        <li>Early access to new features</li>
-        <li>Cancel any time</li>
+        <li>All 6 daily tasks unlocked</li>
+        <li>Up to 2 hours daily scroll budget</li>
+        <li>Unlimited monitored apps</li>
+        <li>Time Reclaimed always unlocked</li>
+        <li>Full Stats tab — Today / Week / Month / Lifetime</li>
+        <li>Morning Nudge with yesterday's recap</li>
+        <li>Auto-restores on reinstall</li>
       </ul>
     </div>
-
   </div>
-  <p class="pricing-note">Free to download and try. Available on <a href="https://apps.apple.com/us/app/earlyrise/id6760259048">iOS via the App Store</a>.</p>
+  <p class="pricing-note">Free to use, forever — upgrade any time. Available on <a href="https://apps.apple.com/us/app/earlyrise/id6760259048">iOS via the App Store</a>.</p>
 </section>
 
+<!-- CTA -->
 <section class="cta-section" id="download">
-  <div class="cta-bg-glow"></div>
   <div class="cta-bg-text">Rise</div>
-  <div style="position:relative;z-index:1">
-    <span class="cta-label">Your morning is waiting</span>
-    <h2 class="cta-title">Ready to<br><em>earn your scroll?</em></h2>
-    <p class="cta-sub">Free to download on iOS. $2.99/month or $20/year — cancel any time. No tricks, no guilt.</p>
-    <div class="store-buttons">
-      <a href="https://apps.apple.com/us/app/earlyrise/id6760259048" class="store-btn">
-        <span class="store-icon">🍎</span>
-        <span><span class="store-text-sm">Download on the</span><span class="store-text-lg">App Store</span></span>
-      </a>
-    </div>
+  <span class="cta-label">Your morning is waiting</span>
+  <h2 class="cta-title">Ready to<br>earn your scroll?</h2>
+  <p class="cta-sub">Download EarlyRise free — start earning your scroll today. Upgrade to Premium any time for $2.99/month or $19.99/year.</p>
+  <div class="store-buttons">
+    <a href="https://apps.apple.com/us/app/earlyrise/id6760259048" class="store-btn">
+      <span class="store-icon">🍎</span>
+      <span><span class="store-text-sm">Download on the</span><span class="store-text-lg">App Store</span></span>
+    </a>
   </div>
 </section>
 
@@ -627,7 +512,7 @@ footer { background: #050A14; padding: 2.75rem 4rem; display: flex; align-items:
   <ul class="footer-links">
     <li><a href="#">Privacy</a></li>
     <li><a href="#">Terms</a></li>
-    <li><a href="#">Contact</a></li>
+    <li><a href="https://earlyrise.kit.com/0c2ef42076">Contact</a></li>
   </ul>
   <p class="footer-copy">© 2026 EarlyRise. All rights reserved.</p>
 </footer>
@@ -638,7 +523,7 @@ footer { background: #050A14; padding: 2.75rem 4rem; display: flex; align-items:
     const s = document.createElement('div');
     s.className = 'star';
     const big = Math.random() > 0.85;
-    s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*72}%;--d:${2+Math.random()*3.5}s;--delay:${Math.random()*5}s;width:${big?'3px':'2px'};height:${big?'3px':'2px'};`;
+    s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*68}%;--d:${2+Math.random()*3.5}s;--delay:${Math.random()*5}s;width:${big?'3px':'2px'};height:${big?'3px':'2px'};`;
     starsEl.appendChild(s);
   }
 </script>
